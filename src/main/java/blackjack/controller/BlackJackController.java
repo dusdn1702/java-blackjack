@@ -45,7 +45,7 @@ public class BlackJackController {
         OutputView.noticePlayersCards(dealer, players);
     }
 
-    public void giveTwoCardsToPlayers(Players players, Deck deck) {
+    public void giveTwoCardsToPlayers(Players players, Deck deck) { //TODO: 분리
         for (int i = 0; i < INITIAL_DRAWING_COUNT; i++) {
             players.giveCards(deck);
         }

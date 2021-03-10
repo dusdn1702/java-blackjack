@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.summingInt;
+
 public class Cards {
     private static final int MAXIMUM_TO_ACE_IS_ELEVEN = 11;
     private static final int MAKING_ACE_ELEVEN = 10;

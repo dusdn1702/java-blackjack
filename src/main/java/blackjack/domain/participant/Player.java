@@ -12,6 +12,7 @@ public class Player extends Gamer {
     private static final String DISAGREE = "n";
 
     private WinnerFlag result;
+    //private State state;
 
     public Player(String name) {
         super(name);
