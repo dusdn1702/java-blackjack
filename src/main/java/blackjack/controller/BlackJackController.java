@@ -1,5 +1,8 @@
 package blackjack.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.DeckGenerator;
 import blackjack.domain.participant.Dealer;
@@ -14,7 +17,7 @@ public class BlackJackController {
 
 	public void run() {
 		Dealer dealer = new Dealer();
-		Players players = askPlayers(dealer);
+		Players players = createPlayersWithMoney(askPlayers(), dealer);
 		Deck deck = new Deck(new DeckGenerator().makeCards());
 
 		playTurn(dealer, players, deck);
@@ -24,39 +27,40 @@ public class BlackJackController {
 		OutputView.printPlayersResult(players);
 	}
 
-	private Players askPlayers(Dealer dealer) {
+	private Players createPlayersWithMoney(List<String> names, Dealer dealer) {
 		try {
-			return new Players(InputView.enterNames(), dealer);
+			return makePlayers(names, dealer);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return askPlayers(dealer);
+			return makePlayers(names, dealer);
+		}
+	}
+
+	private List<String> askPlayers() {
+		try {
+			return InputView.enterNames();
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return askPlayers();
 		}
 	}
 
 	private void playTurn(Dealer dealer, Players players, Deck deck) {
-		createPlayersWithMoney(players);
 		drawCards(dealer, players, deck);
 		drawUntilPossible(dealer, players, deck);
 	}
 
-	private void createPlayersWithMoney(Players players) {
-		try {
-			askPlayerMoney(players);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			askPlayerMoney(players);
+	private Players makePlayers(List<String> playersName, Dealer dealer) {
+		List<Player> players = new ArrayList<>();
+		for (String name : playersName) {
+			players.add(new Player(name, askMoney(name)));
 		}
+		return new Players(players, dealer);
 	}
 
-	private void askPlayerMoney(Players players) {
-		for (Player player : players.toList()) {
-			player.makeMoney(askMoney(player));
-		}
-	}
-
-	private int askMoney(Player player) {
+	private int askMoney(String name) {
 		try {
-			return Integer.parseInt(InputView.enterBetting(player));
+			return Integer.parseInt(InputView.enterBetting(name));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_MESSAGE_INPUT);
 		}

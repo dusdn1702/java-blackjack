@@ -16,7 +16,7 @@ public class InputView {
 	static Scanner scanner = new Scanner(System.in);
 
 	public static boolean isContinueDraw(Player player) {
-		System.out.println(player.getName() + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
+		System.out.println(player.getPlayerName() + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
 		String input = scanner.nextLine();
 		if (AGREE.equals(input)) {
 			return true;
@@ -32,8 +32,8 @@ public class InputView {
 		return Arrays.asList(scanner.nextLine().split(COMMA_DELIMITER));
 	}
 
-	public static String enterBetting(Player player) {
-		System.out.println(player.getName() + "의 배팅 금액은?");
+	public static String enterBetting(String name) {
+		System.out.println(name + "의 배팅 금액은?");
 		return scanner.nextLine();
 	}
 }

@@ -10,11 +10,11 @@ import blackjack.domain.state.PlayerState;
 public abstract class Gamer {
 	public static final String COMMA_DELIMITER = ",";
 
-	protected final PlayerName name;
+	protected final PlayerName playerName;
 	protected PlayerState playerState;
 
 	protected Gamer(String name) {
-		this.name = new PlayerName(name);
+		this.playerName = new PlayerName(name);
 		this.playerState = new Hit(new ParticipantCards());
 	}
 
@@ -32,8 +32,8 @@ public abstract class Gamer {
 		return playerState;
 	}
 
-	public String getName() {
-		return name.getName();
+	public String getPlayerName() {
+		return playerName.getName();
 	}
 
 	@Override
@@ -43,11 +43,11 @@ public abstract class Gamer {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Gamer gamer = (Gamer)o;
-		return Objects.equals(name, gamer.name) && Objects.equals(playerState, gamer.playerState);
+		return Objects.equals(playerName, gamer.playerName) && Objects.equals(playerState, gamer.playerState);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, playerState);
+		return Objects.hash(playerName, playerState);
 	}
 }

@@ -1,6 +1,5 @@
 package blackjack.domain.participant;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,17 +11,9 @@ public class Players {
 	private final List<Player> players;
 	private final Gamer dealer;
 
-	public Players(List<String> value, Dealer dealer) {
-		this.players = createPlayers(value);
+	public Players(List<Player> players, Dealer dealer) {
+		this.players = players;
 		this.dealer = dealer;
-	}
-
-	private List<Player> createPlayers(List<String> value) {
-		List<Player> splitPlayers = new ArrayList<>();
-		for (String name : value) {
-			splitPlayers.add(new Player(name, 0));
-		}
-		return splitPlayers;
 	}
 
 	public void initialCards(Deck deck) {
@@ -35,8 +26,8 @@ public class Players {
 	public int calculateProfits(Dealer dealer) {
 		PlayerState dealerState = dealer.playerState;
 		int total = players.stream()
-			.peek(player -> player.calculateProfit(dealerState))
-			.map(Player::getMoney)
+			.map(player -> player.calculateProfit(dealerState))
+			// .map(Player::getMoney)
 			.reduce(0, Integer::sum);
 		return total * -1;
 	}
@@ -46,7 +37,7 @@ public class Players {
 	}
 
 	public String getDealerName() {
-		return dealer.getName();
+		return dealer.getPlayerName();
 	}
 
 	@Override

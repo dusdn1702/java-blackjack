@@ -3,20 +3,15 @@ package blackjack.domain.participant;
 import blackjack.domain.state.PlayerState;
 
 public class Player extends Gamer {
-	private Money money;
+	private final Money money;
 
 	public Player(String name, double money) {
 		super(name);
 		this.money = Money.of(money);
 	}
 
-	public void makeMoney(double askMoney) {
-		money = Money.of(askMoney);
-	}
-
-	public void calculateProfit(PlayerState dealerState) {
-		double profit = playerState.makeProfit(dealerState, money);
-		money = Money.of(profit);
+	public int calculateProfit(PlayerState dealerState) {
+		return (int)playerState.makeProfit(dealerState, money);
 	}
 
 	@Override

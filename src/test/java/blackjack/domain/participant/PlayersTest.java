@@ -24,9 +24,8 @@ public class PlayersTest {
 
 	@BeforeEach
 	void setUp() {
-		List<String> input = Arrays.asList("pobi", "jason");
 		dealer = new Dealer();
-		players = new Players(input, dealer);
+		players = new Players(Arrays.asList(new Player("pobi", 100), new Player("jason", 100)), dealer);
 
 		final List<Card> participantCards = new ArrayList<>();
 		participantCards.add(new Card(CardPattern.HEART, CardNumber.SEVEN));
@@ -53,7 +52,6 @@ public class PlayersTest {
 	@DisplayName("딜러 이윤 계산 확인")
 	void calculateDealerProfit() {
 		for (Player player : players.toList()) {
-			player.makeMoney(100);
 			player.playerState = StateFactory.drawTwoCards(new Card(CardPattern.DIAMOND, CardNumber.SEVEN),
 				new Card(CardPattern.HEART, CardNumber.TWO));
 			player.canReceiveCard(false);

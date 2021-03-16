@@ -24,13 +24,13 @@ public class OutputView {
 	public static void noticeDrawTwoCards(Players players) {
 		System.out.println();
 		String playerNames = players.toList().stream()
-			.map(Gamer::getName)
+			.map(Gamer::getPlayerName)
 			.collect(Collectors.joining(", "));
 		System.out.printf(NOTICE_DRAWING_CARDS, players.getDealerName(), playerNames, INITIAL_DRAWING_COUNT);
 	}
 
 	public static void noticePlayersCards(Dealer dealer, Players players) {
-		System.out.println(dealer.getName() + COLON_DELIMITER + makeDealerCardNames(dealer));
+		System.out.println(dealer.getPlayerName() + COLON_DELIMITER + makeDealerCardNames(dealer));
 		for (Player player : players.toList()) {
 			noticePlayerCards(player);
 		}
@@ -39,10 +39,10 @@ public class OutputView {
 
 	public static void noticePlayersPoint(Dealer dealer, Players players) {
 		System.out.println();
-		System.out.println(dealer.getName() + COLON_DELIMITER + makePlayerCardNames(dealer) + RESULT_DELIMITER
+		System.out.println(dealer.getPlayerName() + COLON_DELIMITER + makePlayerCardNames(dealer) + RESULT_DELIMITER
 			+ dealer.calculatePoint());
 		for (Player player : players.toList()) {
-			System.out.println(player.getName() + CARD_DELIMITER + makePlayerCardNames(player)
+			System.out.println(player.getPlayerName() + CARD_DELIMITER + makePlayerCardNames(player)
 				+ RESULT_DELIMITER + player.calculatePoint());
 		}
 	}
@@ -69,7 +69,7 @@ public class OutputView {
 	}
 
 	public static void noticePlayerCards(Player player) {
-		System.out.println(player.getName() + CARD_DELIMITER + makePlayerCardNames(player));
+		System.out.println(player.getPlayerName() + CARD_DELIMITER + makePlayerCardNames(player));
 	}
 
 	public static void printDealerResult(int result) {
@@ -80,7 +80,7 @@ public class OutputView {
 
 	public static void printPlayersResult(Players players) {
 		for (Player player : players.toList()) {
-			System.out.println(player.getName() + COLON_DELIMITER + player.getMoney());
+			System.out.println(player.getPlayerName() + COLON_DELIMITER + player.getMoney());
 		}
 	}
 }

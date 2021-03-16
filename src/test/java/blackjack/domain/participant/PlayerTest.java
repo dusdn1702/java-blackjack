@@ -19,7 +19,7 @@ public class PlayerTest {
 
 	@BeforeEach
 	void setUp() {
-		player = new Player("pobi", 0);
+		player = new Player("pobi", 1000);
 		Card first = new Card(CardPattern.CLOVER, CardNumber.FIVE);
 		Card second = new Card(CardPattern.HEART, CardNumber.THREE);
 		player.playerState = StateFactory.drawTwoCards(first, second);
@@ -97,10 +97,7 @@ public class PlayerTest {
 			new Card(CardPattern.DIAMOND, CardNumber.TEN));
 		player.receiveCard(new Card(CardPattern.HEART, CardNumber.TEN));
 		player.canReceiveCard(false);
-		player.makeMoney(1000);
-		player.calculateProfit(dealer.playerState);
-		assertEquals(-1000, player.getMoney());
-
+		assertEquals(-1000, player.calculateProfit(dealer.playerState));
 	}
 
 	@Test
@@ -112,9 +109,7 @@ public class PlayerTest {
 			new Card(CardPattern.DIAMOND, CardNumber.TEN));
 		player.receiveCard(new Card(CardPattern.HEART, CardNumber.TEN));
 		player.canReceiveCard(false);
-		player.makeMoney(1000);
-		player.calculateProfit(dealer.playerState);
-		assertEquals(0, player.getMoney());
+		assertEquals(0, player.calculateProfit(dealer.playerState));
 	}
 
 	@Test
@@ -126,8 +121,6 @@ public class PlayerTest {
 			new Card(CardPattern.DIAMOND, CardNumber.TEN));
 		player.receiveCard(new Card(CardPattern.HEART, CardNumber.ACE));
 		player.canReceiveCard(false);
-		player.makeMoney(1000);
-		player.calculateProfit(dealer.playerState);
-		assertEquals(1000, player.getMoney());
+		assertEquals(1000, player.calculateProfit(dealer.playerState));
 	}
 }

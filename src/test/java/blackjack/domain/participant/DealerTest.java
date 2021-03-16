@@ -22,7 +22,7 @@ public class DealerTest {
 	@Test
 	@DisplayName("딜러 생성 확인")
 	void create() {
-		assertEquals("딜러", dealer.getName());
+		assertEquals("딜러", dealer.getPlayerName());
 	}
 
 	@Test
